@@ -1,30 +1,34 @@
-let mthExpression = prompt (`Put in Math problem.`);
-let checked = inputSanitize (mthExpression);
-let result = Calc (checked);
+let num1 = Number(prompt(`Put in num1!`));
+let operand = prompt(`Put in the operator`);
+let num2 = Number (prompt(`Put in num2!`));
 
-alert (`Result: ${result}`);
-
-function checkAuth (input) {
-    const symbolArray = ["+", "-", "*", "/"]
-    for (let i = 0; i < input.length; i++) {
-        if (symbolArray.includes (input[i])) {
-            return true;
-        }   
-    } return false;
-}
-
-function inputSanitize (input) {
-    if (checkAuth(input)) {
-        return input.replace (/\s/g)
-    } else {
-        return "Invalid Response!!!"
+const calc = (num1, operand, num2) => {
+    let result;
+    switch (operand) {
+        case "+":
+            result = num1 + num2;
+            break;
+        case "-":
+            result = num1 - num2;
+            break;
+        case "*":
+            result = num1 * num2
+            break;
+        case "/":
+            if (num2 !== 0){
+                result = num1/num2;
+            } else {
+                result = undefined;
+            }
+            break;
+        case "^" || "**":
+            result = Math.pow (num1,num2);
+            break;
+        default:
+            result = undefined;
+            break;
     }
+    return alert (`Result: ${result}`);
 }
 
-function Calc (input) {
-    try {
-        return eval(input);
-    } catch (error) {
-        return "Invalid Response!!!";
-    }
-}
+calc (num1, operand, num2);
